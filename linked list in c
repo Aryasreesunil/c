@@ -1,0 +1,217 @@
+    #include<stdio.h>
+    #include<stdlib.h>
+     typedef struct node
+     {
+         int data;
+         struct node*next;
+     }node;
+     node*head=NULL;
+     node*createnode(int data)
+     {
+         node*n;
+         n=(node*) malloc(sizeof (node));
+         n->data=data;
+         n->next=NULL;
+         return n;
+     }
+     void insert_at_begin(node*p)
+     {
+         if(head==NULL)
+         head=p;
+         else
+         {
+             p->next=head;
+         }
+     }
+     void delete_at_begin()
+     {
+         if(head==NULL)
+         {
+             printf("list is empty");return;
+         }
+         else if(head->next==NULL)
+        { head=NULL;return;}
+         else
+        { head=head->next;
+         return;}
+     }
+     void insert_at_end(node*p)
+     {
+         node*temp;
+         temp=head;
+         if(temp==NULL)
+         head=p;
+         else
+         {
+             while(temp->next=NULL)
+             temp=temp->next;
+             temp->next=p;
+         }
+        
+         }
+    void delete_at_end()
+    {
+        node*temp;
+        if(head==NULL)
+        {
+            printf("list is empty\n");return;
+            
+        }
+        else if (head->next==NULL)
+        {
+            head=NULL;return;
+        }
+        else{
+            temp=head;
+            while(temp->next->next!=NULL)
+            temp=temp->next;
+            temp->next=NULL;
+            return;
+        }
+    }
+    void insert_before(node*p,int key)
+    {node*temp;
+    if(head==NULL)
+    {
+        printf("insertion not possible or list is empty");
+    }
+    else{
+        temp=head;
+        if(temp->next==NULL)
+        {
+            if(temp->data==key)
+            {
+                p->next=head;
+                head=p;
+                return;}
+            
+            else
+            {
+                printf("not possible\n");return;
+            }}
+        else{
+            while(temp->next!=NULL)
+            {
+                if(temp->next->data==key)
+                {
+                    p->next=temp->next;
+                    temp->next=p;return;
+                }else
+                {
+                    temp=temp->next;
+                }}
+            }printf("insertion not possible\n");return;
+        }
+     
+    
+
+    }
+    void delete_before(node*temp,int key)
+    {
+        if(head==NULL)
+        {
+            printf("list is empty");return;}
+        else if(head->next==NULL)
+        {
+            printf("delete before is not possible");return;
+        }else
+        {
+            temp=head;
+            if(temp->next->data==key){
+                head=head->next;return;
+                }else
+            {
+          while  (temp->next->next!=NULL)
+          {
+              if(temp->next->next->data==key){
+                  temp->next=temp->next->next;return;
+                 
+              }
+                  
+         else
+              temp=temp->next;
+          }}
+    
+        printf("key is not present in the list");}}
+        void insert_after(node*p,int key)
+        {node*temp;
+        if(head==NULL)
+        {
+        printf("list is empty,insertin not possible");
+        }
+        else
+        {temp=head;
+          while(temp!=NULL)
+          {
+              if (temp->data==key)
+              {
+                  if(temp->next==NULL)
+                  {
+                      temp->next=p;
+                  return;}
+              }else {p->next=temp->next;
+              temp->next=p;return;}
+          }printf("insertion not possible since key is not present");
+        }
+            
+        }
+    
+     
+     void display()
+     {
+         node*temp;
+         temp=head;
+         if(temp==NULL)
+         {
+             printf("list is empty");
+             
+         }
+         else
+         printf("head->");
+         while(temp!=NULL){
+         printf("%d->",temp->data);
+             temp=temp->next;}
+         
+         printf("NULL\n");}
+     void main()
+     {
+         int choice,data,c,key;
+         node*n;
+         do{
+             printf("1.insert_at_begin\n2.delete_at_begin\n3.insert_at_end\n4.delete_at_end\n5.insert_before\n6.delete_before\n7.insert_after\n9.display\nenter according to your choice\n");
+             scanf("%d",&choice);
+             switch(choice)
+             {
+                  case 1:printf("enter the node data");
+                         scanf("%d",&data);
+                         n=createnode(data);
+                         insert_at_begin(n);
+                         display();break;
+                case 2 : delete_at_begin(n,data);display();break;
+                case 3: printf("enter the node data");
+                        scanf("%d",&data);
+                        n=createnode(data);
+                        insert_at_end(n);
+                        display();break;
+                case 4:delete_at_end();display();break;
+                case 5 : printf("before which node you want to insert");
+                        scanf("%d",&key);
+                        printf("enter the node data");
+                        scanf("%d",&data);
+                        insert_before(n,data);display();break;
+                case 6 : printf("before which node you want to delete") ;
+                        scanf("%d",&key);
+                        delete_before(n,data);display();break;
+                case 7 : printf("after which node you want to enter");
+                        scanf("%d",&key);
+                        printf("enter the node data");
+                        scanf("%d",&data);
+                        n=createnode(data);
+                        insert_after(n,data);display();break;
+                case 9: display();break;
+                default:("invalid choice\n");break;
+             }printf("if you want to continue press 1\n");
+             scanf("%d",&c);
+                
+         }while(c==1);}
+     
